@@ -8,10 +8,12 @@
 #include "FastLED.h"
 
 // How many leds are in the strip?
-#define NUM_LEDS 64*4
+#define NUM_LEDS_PER_STRIP 60
+#define NUM_STRIP           4
+#define NUM_LEDS            NUM_LEDS_PER_STRIP*NUM_STRIP
 
 // Data pin that led data will be written out over
-#define DATA_PIN 8
+#define DATA_PIN 4
 
 #define SETTING_RISING_RATE             5 
 #define SETTING_FALLING_RATE           25 
@@ -86,9 +88,14 @@ CFireFliesLEDs  ledFireFly[NUM_LEDS];
 void setup() {
   Serial.begin(115200);
   
-	// sanity check delay - allows reprogramming if accidently blowing power w/leds
-   	delay(2000);
-    FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
+  // sanity check delay - allows reprogramming if accidently blowing power w/leds
+    delay(2000);
+    FastLED.addLeds<WS2812B, DATA_PIN+0, RGB>(leds, NUM_LEDS_PER_STRIP);
+    FastLED.addLeds<WS2812B, DATA_PIN+1, RGB>(leds+NUM_LEDS_PER_STRIP*1, NUM_LEDS_PER_STRIP);
+    FastLED.addLeds<WS2812B, DATA_PIN+2, RGB>(leds+NUM_LEDS_PER_STRIP*2, NUM_LEDS_PER_STRIP);
+    FastLED.addLeds<WS2812B, DATA_PIN+3, RGB>(leds+NUM_LEDS_PER_STRIP*3, NUM_LEDS_PER_STRIP);
+
+    
     Serial.println("Starting...");
 }
 
