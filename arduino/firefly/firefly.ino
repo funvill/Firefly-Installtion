@@ -8,12 +8,12 @@
 #include "FastLED.h"
 
 // How many leds are in the strip?
-#define NUM_LEDS_PER_STRIP 60
-#define NUM_STRIP           4
+#define NUM_LEDS_PER_STRIP 30*5
+#define NUM_STRIP           1
 #define NUM_LEDS            NUM_LEDS_PER_STRIP*NUM_STRIP
 
 // Data pin that led data will be written out over
-#define DATA_PIN 4
+#define DATA_PIN 6
 
 #define SETTING_RISING_RATE             5 
 #define SETTING_FALLING_RATE           25 
@@ -21,7 +21,7 @@
 #define SETTING_STARTING_BRIGHTNESS    30 
 #define SETTING_TIMER_CREATION         40 
 #define SETTING_TIMER_FRAMES           40 
-#define SETTING_SATURATION            255 // Set to 0 for white leds, or 255 for full color. 
+#define SETTING_SATURATION            0 // Set to 0 for white leds, or 255 for full color. 
 
 #define LED_STATE_OFF      0
 #define LED_STATE_RISING   1
@@ -91,9 +91,9 @@ void setup() {
   // sanity check delay - allows reprogramming if accidently blowing power w/leds
     delay(2000);
     FastLED.addLeds<WS2812B, DATA_PIN+0, RGB>(leds, NUM_LEDS_PER_STRIP);
-    FastLED.addLeds<WS2812B, DATA_PIN+1, RGB>(leds+NUM_LEDS_PER_STRIP*1, NUM_LEDS_PER_STRIP);
-    FastLED.addLeds<WS2812B, DATA_PIN+2, RGB>(leds+NUM_LEDS_PER_STRIP*2, NUM_LEDS_PER_STRIP);
-    FastLED.addLeds<WS2812B, DATA_PIN+3, RGB>(leds+NUM_LEDS_PER_STRIP*3, NUM_LEDS_PER_STRIP);
+    //FastLED.addLeds<WS2812B, DATA_PIN+1, RGB>(leds+NUM_LEDS_PER_STRIP*1, NUM_LEDS_PER_STRIP);
+    //FastLED.addLeds<WS2812B, DATA_PIN+2, RGB>(leds+NUM_LEDS_PER_STRIP*2, NUM_LEDS_PER_STRIP);
+    //FastLED.addLeds<WS2812B, DATA_PIN+3, RGB>(leds+NUM_LEDS_PER_STRIP*3, NUM_LEDS_PER_STRIP);
 
     
     Serial.println("Starting...");
